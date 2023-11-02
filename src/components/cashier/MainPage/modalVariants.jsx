@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-use-before-define */
 import React, { useEffect, useState } from 'react';
 import {
   Modal,
@@ -14,12 +12,8 @@ import {
   Button,
   FormControl,
   FormLabel,
-  // Box,
   ModalHeader,
 } from '@chakra-ui/react';
-// import { useDispatch } from 'react-redux';
-// import { asyncTransaction } from '../../../states/transaction/action';
-// import { asyncReceiveProducts } from '../../../states/products/action';
 
 function CustomModal({
   isOpen,
@@ -29,6 +23,7 @@ function CustomModal({
   setVariants,
 }) {
   const [selectedVariants, setSelectedVariants] = useState();
+
   useEffect(() => {
     setSelectedVariants(product?.Variants.map((variant) => ({ ...variant })));
   }, [product, isOpen]);
@@ -39,42 +34,22 @@ function CustomModal({
         const newVariant = { ...variant };
         if (newVariant.id === variantId && newVariant.stock - 1 >= 0) {
           newVariant.quantity = newVariant.quantity + 1 || 0;
-          return newVariant;
         }
         return newVariant;
       })
     );
   };
 
-  // const arrSelectedVariantsId = selectedVariants.map(({ id, quantity }) => {
-  //   if (quantity && quantity > 0) return id;
-  //   return null;
-  // });
   const handleOnSave = () => {
-    // Create an array to store the selected variants with additional information
-    // const arrSelectedVariantsId = selectedVariants
-    //   .map(({ id, name, price, quantity }) => {
-    //     if (quantity && quantity > 0) {
-    //       return {
-    //         id,
-    //         name,
-    //         price,
-    //         quantity,
-    //       };
-    //     }
-    //     return null;
-    //   })
-    //   .filter((variant) => variant !== null);
-
     const arrSelectedVariantsId = selectedVariants.map(({ id, quantity }) => {
       if (quantity && quantity > 0) return id;
       return null;
     });
+
     const newVariants = variants.filter(
       (variant) => !arrSelectedVariantsId.includes(variant.variantId)
     );
-    console.log(newVariants);
-    console.log(arrSelectedVariantsId);
+
     selectedVariants.forEach((variant) => {
       if (arrSelectedVariantsId.includes(variant.id)) {
         newVariants.push({
@@ -97,7 +72,7 @@ function CustomModal({
         <ModalCloseButton />
         <ModalBody>
           <Image
-            width="700px"
+            width="100%"
             height="300px"
             objectFit="cover"
             src={`${import.meta.env.VITE_API_URL}/products/image/${
@@ -111,7 +86,7 @@ function CustomModal({
           </Stack>
           <FormControl mt="4">
             <FormLabel>Variant | Choose Many</FormLabel>
-            <Stack direction="row" spacing={3}>
+            <Stack direction="row" spacing={2} wrap="wrap">
               {selectedVariants &&
                 selectedVariants?.map((variant) => (
                   <Button
@@ -119,7 +94,8 @@ function CustomModal({
                     size="sm"
                     colorScheme={variant.quantity ? 'red' : 'gray'}
                     onClick={() => handleAddVariantQuantity(variant.id)}
-                    width="250px"
+                    width="100%"
+                    marginBottom="2"
                   >
                     {variant.name} ({variant.quantity || 0})
                   </Button>
@@ -129,18 +105,11 @@ function CustomModal({
         </ModalBody>
 
         <ModalFooter display="flex" justifyContent="space-between">
-          <Button
-            size="sm"
-            border="1px solid black"
-            // colorScheme="red"
-            onClick={onClose}
-            color="black"
-          >
+          <Button size="sm" colorScheme="gray" onClick={onClose}>
             Close
           </Button>
           <Button
             size="sm"
-            variant="solid"
             colorScheme="red"
             color="white"
             onClick={handleOnSave}

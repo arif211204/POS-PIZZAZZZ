@@ -88,6 +88,7 @@ function asyncCreateProduct(formData) {
       dispatch(setAlertActionCreator());
       return true;
     } catch (err) {
+      console.log(err, 'error in create product');
       dispatch(setAlertActionCreator({ err }));
       return false;
     } finally {

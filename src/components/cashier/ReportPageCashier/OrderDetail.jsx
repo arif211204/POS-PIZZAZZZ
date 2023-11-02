@@ -4,34 +4,40 @@ import { asyncGetAllTransaction } from '../../../states/transaction/action';
 
 const styles = {
   container: {
-    border: '1px solid black',
-    padding: '10px',
-    width: '80%',
+    border: '1px solid #ddd',
+    padding: '20px',
+    width: '90%',
     margin: '0 auto',
+    backgroundColor: '#f7f7f7',
+    fontFamily: 'Arial, sans-serif',
   },
   header: {
     textAlign: 'center',
-  },
-  inputLabel: {
-    marginRight: '10px',
+    backgroundColor: '#333',
+    color: 'white',
+    padding: '10px',
+    fontSize: '24px',
   },
   table: {
     borderCollapse: 'collapse',
     width: '100%',
+    marginTop: '20px',
   },
   tableHeaderCell: {
-    border: '1px solid black',
-    padding: '5px',
+    border: '1px solid #ccc',
+    padding: '10px',
     textAlign: 'center',
+    backgroundColor: '#333',
+    color: 'white',
   },
   tableCell: {
-    padding: '5px',
+    padding: '10px',
     textAlign: 'center',
-    border: '1px solid black',
+    border: '1px solid #ccc',
   },
   tableFooterCell: {
-    borderTop: '1px solid black',
-    padding: '5px',
+    borderTop: '1px solid #ccc',
+    padding: '10px',
     textAlign: 'center',
   },
 };
@@ -110,7 +116,13 @@ function SalesReport() {
             <tr key={transaction.id} style={{ border: '1px solid black' }}>
               <td style={styles.tableCell}>{transaction.product}</td>
               <td style={styles.tableCell}>{transaction.quantity}</td>
-              <td style={styles.tableCell}>Rp {transaction.total}</td>
+              <td style={styles.tableCell}>
+                {transaction.total.toLocaleString('id-ID', {
+                  style: 'currency',
+                  currency: 'IDR',
+                })}
+              </td>
+
               <td style={styles.tableCell}>{transaction.date}</td>
             </tr>
           ))}
@@ -122,7 +134,11 @@ function SalesReport() {
               {startDate && endDate
                 ? `${startDate} to ${endDate}`
                 : 'all dates'}
-              : Rp {totalSales}
+              :{' '}
+              {`Rp ${totalSales.toLocaleString('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+              })}`}
             </td>
           </tr>
         </tfoot>

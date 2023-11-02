@@ -103,8 +103,10 @@ function SalesReport() {
       <canvas id="salesChart" />
       <div style={{ textAlign: 'center', marginTop: '10px' }}>
         Total sales for{' '}
-        {startDate && endDate ? `${startDate} to ${endDate}` : 'all dates'}: Rp{' '}
-        {filteredSalesData.reduce((total, sale) => total + sale.total, 0)}
+        {startDate && endDate ? `${startDate} to ${endDate}` : 'all dates'}:{' '}
+        {filteredSalesData
+          .reduce((total, sale) => total + sale.total, 0)
+          .toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}
       </div>
     </div>
   );
