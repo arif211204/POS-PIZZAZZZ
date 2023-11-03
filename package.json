@@ -1,11 +1,10 @@
 {
-  "name": "pos-pizzazzz",
+  "name": "pos-project",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "start": "npx http-server ./dist",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
