@@ -20,6 +20,7 @@ function unsetAuthUserActionCreator() {
     type: ActionType.UNSET_AUTH_USER,
   };
 }
+
 function receiveUsersActionCreator(users) {
   return {
     type: ActionType.RECEIVE_USERS,
@@ -38,11 +39,14 @@ function asyncSetAuthUser({ username, password }) {
     dispatch(setAuthUserActionCreator(data.data.user));
   };
 }
-
+// logout user
 function asyncUnsetAuthUser() {
   return (dispatch) => {
     localStorage.removeItem('token');
+
     dispatch(unsetAuthUserActionCreator());
+
+    console.log('logout succes');
   };
 }
 

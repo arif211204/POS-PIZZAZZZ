@@ -33,6 +33,7 @@ function App() {
   }
 
   if (authUser === null) {
+    console.log('authUser null :>> ', authUser);
     return (
       <Routes>
         <Route
@@ -58,38 +59,33 @@ function App() {
     );
   }
 
-  if (pathLocation === 'admin') {
+  if (authUser.isAdmin) {
+    console.log('pathLocation admin :>> ', pathLocation);
     return (
-      authUser.isAdmin && (
-        <>
-          <Alert />
-          <Loading />
-          <AdminNavbar />
-          <Routes>
-            <Route path="/admin/products" element={<ProductPage />} />
-            <Route
-              path="/admin/administrator"
-              element={
-                <ChakraProvider>
-                  <AdminPage />
-                </ChakraProvider>
-              }
-            />
-            <Route path="/admin/categories" element={<CategoryPage />} />
-            <Route path="/admin/report" element={<ReportPageAdmin />} />
-            <Route
-              path="/admin/*"
-              element={<Navigate to="/admin/products" />}
-            />
-            <Route path="/logout" element={<LogoutUser />} />
-          </Routes>
-        </>
-      )
+      <>
+        <Alert />
+        <Loading />
+        <AdminNavbar />
+        <Routes>
+          <Route path="/admin/products" element={<ProductPage />} />
+          <Route
+            path="/admin/administrator"
+            element={
+              <ChakraProvider>
+                <AdminPage />
+              </ChakraProvider>
+            }
+          />
+          <Route path="/admin/categories" element={<CategoryPage />} />
+          <Route path="/admin/report" element={<ReportPageAdmin />} />
+          <Route path="/admin/*" element={<Navigate to="/admin/products" />} />
+          <Route path="/logout" element={<LogoutUser />} />
+        </Routes>
+      </>
     );
   }
-
-  return (
-    authUser.isCashier && (
+  if (authUser.isCashier) {
+    return (
       <>
         <Alert />
         <Loading />
@@ -108,8 +104,10 @@ function App() {
           <Route path="/logout" element={<LogoutUser />} />
         </Routes>
       </>
-    )
-  );
+    );
+  }
+  console.log('pathLocation outside :>> ', pathLocation);
+  console.log('authUser oustide:>> ', authUser);
 }
 
 export default App;

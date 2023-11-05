@@ -102,11 +102,19 @@ function asyncEditProduct({ productId, formData }) {
     try {
       dispatch(showLoading());
       const { data } = await api.patch(`/products/${productId}`, formData);
-      dispatch(editProductActionCreator(data.data));
+
+      if (data.data) {
+        dispatch(editProductActionCreator(data.data));
+        console.log(data.data);
+      }
+
       dispatch(setAlertActionCreator());
+      window.location.reload();
+
       return true;
     } catch (err) {
       dispatch(setAlertActionCreator({ err }));
+
       return false;
     } finally {
       dispatch(hideLoading());
