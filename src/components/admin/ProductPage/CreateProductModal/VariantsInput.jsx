@@ -29,7 +29,7 @@ function VariantsInput() {
             Product Variants
           </Typography>
           <Box>
-            {form.values[name].map((variant, index) => (
+            {form?.values[name].map((variant, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <Accordion key={index}>
                 <AccordionSummary expandIcon={<ExpandMoreRounded />}>

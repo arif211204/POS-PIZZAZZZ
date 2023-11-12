@@ -33,39 +33,42 @@ function LoginPageCashier() {
         });
       });
   };
+
   return (
     <Flex
       h="100vh"
       alignItems="center"
       justifyContent="center"
-      backgroundImage=" https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+      backgroundImage="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
       backgroundRepeat="no-repeat"
       backgroundPosition="center"
       backgroundSize="cover"
       position="relative"
     >
-      <Flex flexDirection="column" p={12} borderRadius={8} bg="#FFFF">
-        <Heading mb={6} textAlign="center" color="#B42318">
-          <Text>Pizza</Text>
-          <Text>Pizzazz</Text>
-        </Heading>
-        <Input
-          placeholder="Username"
-          color="gray.500"
-          mb={3}
-          onChange={handleUsernameChange}
-        />
-        <Input
-          placeholder="Password"
-          type="password"
-          color="gray.500"
-          mb={6}
-          onChange={handlePasswordChange}
-        />
-        <Button bgColor="#B42318" color="white" mb={5} onClick={handleSubmit}>
-          Log In
-        </Button>
-      </Flex>
+      <form onSubmit={handleSubmit}>
+        <Flex flexDirection="column" p={12} borderRadius={8} bg="#FFFF">
+          <Heading mb={6} textAlign="center" color="#B42318">
+            <Text>Pizza</Text>
+            <Text>Pizzazz</Text>
+          </Heading>
+          <Input
+            placeholder="Username"
+            color="gray.500"
+            mb={3}
+            onChange={handleUsernameChange}
+          />
+          <Input
+            placeholder="Password"
+            type="password"
+            color="gray.500"
+            mb={6}
+            onChange={handlePasswordChange}
+          />
+          <Button bgColor="#B42318" color="white" mb={5} type="submit">
+            Log In
+          </Button>
+        </Flex>
+      </form>
     </Flex>
   );
 }

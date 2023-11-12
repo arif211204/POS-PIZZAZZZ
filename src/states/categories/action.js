@@ -39,6 +39,7 @@ function asyncReceiveCategories({ name } = {}) {
 
       const { data } = await api.get(`/categories${allQuery}`);
       dispatch(receiveCategoriesActionCreator(data.data));
+      console.log('data category :>> ', data);
     } catch (err) {
       dispatch(setAlertActionCreator({ err }));
     } finally {
@@ -68,9 +69,14 @@ function asyncEditCategory({ categoryId, formData }) {
     try {
       dispatch(showLoading());
       const { data } = await api.patch(`/categories/${categoryId}`, formData);
-      dispatch(editCategoryActionCreator(data.data));
-      dispatch(setAlertActionCreator());
-      return true;
+
+      if (data.success) {
+        dispatch(editCategoryActionCreator(data.data));
+        dispatch(setAlertActionCreator());
+        return true;
+      }
+      dispatch(setAlertActionCreator({ err: data.message }));
+      return false;
     } catch (err) {
       dispatch(setAlertActionCreator({ err }));
       return false;

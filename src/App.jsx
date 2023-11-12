@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import { asyncPreloadProcess } from './states/isPreload/action';
 import LoginPageAdmin from './pages/admin/LoginPageAdmin';
@@ -21,8 +21,6 @@ function App() {
   const authUser = useSelector((states) => states.authUser);
   const isPreload = useSelector((states) => states.isPreload);
   const dispatch = useDispatch();
-  const location = useLocation();
-  const pathLocation = location.pathname.split('/')[1];
 
   useEffect(() => {
     dispatch(asyncPreloadProcess());
@@ -33,7 +31,6 @@ function App() {
   }
 
   if (authUser === null) {
-    console.log('authUser null :>> ', authUser);
     return (
       <Routes>
         <Route
@@ -60,7 +57,6 @@ function App() {
   }
 
   if (authUser.isAdmin) {
-    console.log('pathLocation admin :>> ', pathLocation);
     return (
       <>
         <Alert />
@@ -106,8 +102,6 @@ function App() {
       </>
     );
   }
-  console.log('pathLocation outside :>> ', pathLocation);
-  console.log('authUser oustide:>> ', authUser);
 }
 
 export default App;

@@ -1,4 +1,3 @@
-// import React, { useState } from 'react';
 import {
   Box,
   Stack,
@@ -11,9 +10,8 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
-
-import { asyncSetAuthUser } from '../../states/authUser/action';
 import useValueInput from '../../hooks/useValueInput';
+import { asyncSetAuthUser } from '../../states/authUser/action';
 
 function LoginPageAdmin() {
   const toast = useToast();
@@ -97,7 +95,7 @@ function LoginPageAdmin() {
             </Heading>
             <Text color="gray.500" fontSize={{ base: 'sm', sm: 'md' }} />
           </Stack>
-          <Box as="form" mt={10}>
+          <form onSubmit={handleSubmit}>
             <Stack spacing={5}>
               <Input
                 placeholder="Username"
@@ -107,7 +105,6 @@ function LoginPageAdmin() {
                 _placeholder={{
                   color: 'gray.500',
                 }}
-                // onChange={(e) => formik.setFieldValue('email', e.target.value)}
                 onChange={handleUsernameChange}
               />
               <Input
@@ -119,9 +116,6 @@ function LoginPageAdmin() {
                 _placeholder={{
                   color: 'gray.500',
                 }}
-                // onChange={(e) =>
-                //   formik.setFieldValue('password', e.target.value)
-                // }
                 onChange={handlePasswordChange}
               />
             </Stack>
@@ -130,17 +124,15 @@ function LoginPageAdmin() {
               mt={8}
               w="full"
               bg="#B42318"
-              // bgGradient="linear(to-r, red.400,pink.400)"
               color="white"
               _hover={{
                 boxShadow: 'xl',
               }}
-              // onClick={formik.handleSubmit}
-              onClick={handleSubmit}
+              type="submit"
             >
               Login
             </Button>
-          </Box>
+          </form>
         </Stack>
       </Container>
     </Box>

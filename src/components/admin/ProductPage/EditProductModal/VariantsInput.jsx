@@ -118,11 +118,11 @@ function VariantsInput() {
                           size="small"
                           error={meta.touched && !!meta.error}
                         >
-                          <InputLabel htmlFor={`variant[${index}]-stock_input`}>
+                          <InputLabel htmlFor={`variants[${index}].stock`}>
                             Variant stock
                           </InputLabel>
                           <OutlinedInput
-                            id={`variant[${index}]-stock_input`}
+                            id={`variants[${index}].stock`}
                             type="number"
                             label="Variant stock"
                             aria-describedby={`variant[${index}]-stock_helper-text`}

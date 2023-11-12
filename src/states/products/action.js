@@ -86,6 +86,7 @@ function asyncCreateProduct(formData) {
       dispatch(showLoading());
       await api.post('/products', formData);
       dispatch(setAlertActionCreator());
+      console.log('formData :>> ', formData);
       return true;
     } catch (err) {
       console.log(err, 'error in create product');
@@ -109,10 +110,13 @@ function asyncEditProduct({ productId, formData }) {
       }
 
       dispatch(setAlertActionCreator());
+      console.log('productId :>> ', productId);
       window.location.reload();
 
       return true;
     } catch (err) {
+      console.log(err, 'error in edit product');
+
       dispatch(setAlertActionCreator({ err }));
 
       return false;
